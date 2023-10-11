@@ -8,7 +8,7 @@ on:
     types: [opened, reopened]
 
   push:
-    branches-ignore: ["prod"]
+    branches: ["**"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
