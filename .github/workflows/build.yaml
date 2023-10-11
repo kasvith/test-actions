@@ -44,7 +44,7 @@ jobs:
         with:
           sha: ${{ github.event.pull_request.head.sha }}
       - name: print pr
-        run: echo ${{ steps.pr.outputs }}
+        run: echo ${{ toJson(steps.pr.outputs) }}
 
   deploy-staging:
     name: Deploy to Staging
