@@ -29,6 +29,10 @@ jobs:
         uses: actions/checkout@v3
       - name: This is a step
         run: echo "This is a step"
+      - name: Debug Branch Info
+        run: |
+          echo "Current branch: ${{ github.ref }}"
+          echo "Event name: ${{ github.event_name }}"
 
   # Deploy preview job
   deploy-preview:
@@ -46,6 +50,10 @@ jobs:
         run: |
           echo "from ${{ fromJSON(steps.PR.outputs.pr).head.ref }}"
           echo "to ${{ fromJSON(steps.PR.outputs.pr).base.ref }}"
+      - name: Debug Branch Info
+        run: |
+          echo "Current branch: ${{ github.ref }}"
+          echo "Event name: ${{ github.event_name }}"
 
   deploy-staging:
     name: Deploy to Staging
@@ -56,3 +64,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: This is a step
         run: echo "This is a step"
+      - name: Debug Branch Info
+        run: |
+          echo "Current branch: ${{ github.ref }}"
+          echo "Event name: ${{ github.event_name }}"
