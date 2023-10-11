@@ -38,13 +38,14 @@ jobs:
     if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/staging' && github.ref != 'refs/heads/prod' && github.event.pull_request.id != ''
     steps:
       - uses: actions/checkout@v3
-      - name: Get Current Pull Request
-        uses: 8BitJonny/gh-get-current-pr@2.2.0
-        id: pr
-        with:
-          sha: ${{ github.event.pull_request.head.sha }}
-      - name: print pr
-        run: echo ${{ toJson(steps.pr.outputs) }}
+      - uses: 8BitJonny/gh-get-current-pr@2.2.0
+        id: PR
+
+      - name: "Pull Request ${{ steps.PR.outputs.number }}"
+        if: steps.PR.outputs.pr_found == 'true'
+        run: |
+          echo "from ${{ fromJSON(steps.PR.outputs.pr).head.ref }}"
+          echo "to ${{ fromJSON(steps.PR.outputs.pr).base.ref }}"
 
   deploy-staging:
     name: Deploy to Staging
